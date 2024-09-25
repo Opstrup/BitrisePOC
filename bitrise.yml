@@ -1,8 +1,21 @@
 ---
-format_version: '13'
+format_version: '17'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: react-native
 workflows:
+  send-notifications:
+    steps:
+    # send notifications
+
+  setup:
+    steps:
+    - activate-ssh-key@4: {}
+    - git-clone@8: {}
+    - yarn@0:
+        inputs:
+        - workdir: "$WORKDIR"
+        - command: install
+
   deploy:
     description: |
       Tests, builds and deploys the app using *Deploy to bitrise.io* Step.
@@ -40,6 +53,7 @@ workflows:
         - configuration: Release
         - automatic_code_signing: api-key
     - deploy-to-bitrise-io@2: {}
+ 
   primary:
     description: |
       Runs tests.
@@ -60,6 +74,18 @@ workflows:
         - command: test
     - save-npm-cache@1: {}
     - deploy-to-bitrise-io@2: {}
+  
+  featureTest:
+   description: |
+      This workflow is used for creating feature test version of the app for the test team. 
+    before_run:
+    - setup
+    steps:
+    - script@1:
+      title: First script
+    - script@1:
+      title: Second script
+
 meta:
   bitrise.io:
     stack: osx-xcode-15.4.x
