@@ -76,15 +76,15 @@ workflows:
     - deploy-to-bitrise-io@2: {}
   
   featureTest:
-   description: |
+    description: |
       This workflow is used for creating feature test version of the app for the test team. 
     before_run:
     - setup
     steps:
     - script@1:
-      title: First script
+        title: First script
     - script@1:
-      title: Second script
+        title: Second script
 
 meta:
   bitrise.io:
