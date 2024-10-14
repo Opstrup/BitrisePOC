@@ -1,3 +1,5 @@
+## TODO: Add comment here explaning that this file needs to be pushed to Bitrise when changed.
+
 ---
 format_version: '17'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
@@ -82,9 +84,9 @@ workflows:
     - setup
     steps:
     - script@1:
-        title: First script
-    - script@1:
-        title: Second script
+        title: Configure build
+        inputs:
+        - script_file_path: configure.sh
 
 meta:
   bitrise.io:
